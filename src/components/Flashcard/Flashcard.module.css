@@ -1,4 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda&display=swap');
+
 .CardComp {
     width: 50%;
-    height: 50%
+    height: 50%;
+    color: #202020;
+    background-color: #f6f0e9;
+}
+
+.CardBody {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.CardTitle {
+    position: absolute;
+    /* margin-left: auto;
+    margin-right: auto; */
+    left: 0;
+    right: 0;
+    top: 10%;
+    font-size: 1.5vw;
+    /* text-align: center; */
+}
+
+.CardText {
+    font-family: 'Bodoni Moda',Georgia,Times,Serif;
+    font-size: 10vw;
 }
