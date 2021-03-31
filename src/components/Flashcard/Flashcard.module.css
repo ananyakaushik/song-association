@@ -2,7 +2,7 @@
 
 .CardComp {
     width: 50%;
-    height: 50%;
+    height: 30vw;
     color: #202020;
     background-color: #f6f0e9;
 }
@@ -26,5 +26,16 @@
 
 .CardText {
     font-family: 'Bodoni Moda',Georgia,Times,Serif;
-    font-size: 10vw;
+    width: 100%;
+    /* font-size: 10vw; */
+}
+
+@media only screen and (max-width: 991px) {
+    .CardComp {
+        height: 50vh;
+    }
+
+    .CardTitle {
+        font-size: 3vw;
+    }
 }
