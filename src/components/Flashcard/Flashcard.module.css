@@ -3,6 +3,7 @@
 .CardComp {
     width: 50%;
     height: 30vw;
+    text-align: center;
     color: #202020;
     background-color: #f6f0e9;
 }

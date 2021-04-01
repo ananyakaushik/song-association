@@ -6,14 +6,14 @@ class Flashcard extends Component {
     render() {
         return(
             // Card Component for flashcard
-            <div class={`card ${classes.CardComp}`}>
-                <div class={`card-body ${classes.CardBody}`}>
+            <div className={`card ${classes.CardComp}`}>
+                <div className={`card-body ${classes.CardBody}`}>
                     {/* Title */}
-                    <h5 class={`card-title ${classes.CardTitle}`}>WORD:</h5>
+                    <h5 className={`card-title ${classes.CardTitle}`}>WORD:</h5>
                     {/* Word displayed for Song Association Game */}
-                    <div class={`card-text ${classes.CardText}`}>
+                    <div className={`card-text ${classes.CardText}`}>
                         <ReactFitty  maxSize="150">
-                            DREAM
+                            {this.props.word}
                         </ReactFitty>
                     </div>
                 </div>

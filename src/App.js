@@ -1,11 +1,12 @@
 import './App.css';
-import Flashcard from './components/Flashcard/Flashcard';
+import Game from './components/Game/Game';
 
 function App() {
   return (
     <div className="App">
       {/* Display flashcard with the Word */}
-      <Flashcard />
+      <Game />
+      
     </div>
   );
 }
