@@ -8,6 +8,7 @@ class Flashcard extends Component {
         return(
             // Card Component for flashcard
             <div className={`card ${classes.CardComp}`}>
+                
                 <div className={`card-body ${classes.CardBody}`}>
                     {/* Title */}
                     <h5 className={`card-title ${classes.CardTitle}`}>WORD:</h5>
@@ -21,7 +22,9 @@ class Flashcard extends Component {
 
                 </div>
                 
-                <PointsButton />
+                {/* Points Button/Checkmark button to add a point to the total for current word */}
+                <PointsButton addPoint={this.props.addPoint}/>
+
             </div>
         );
     }
