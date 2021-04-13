@@ -10,19 +10,17 @@
 
 .CardBody {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
 .CardTitle {
     position: absolute;
-    /* margin-left: auto;
-    margin-right: auto; */
     left: 0;
     right: 0;
     top: 10%;
     font-size: 1.5vw;
-    /* text-align: center; */
 }
 
 .CardText {

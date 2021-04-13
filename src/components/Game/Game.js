@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Flashcard from '../Flashcard/Flashcard';
-import PlayButton from '../PlayButton/PlayButton';
-import Timer from '../Timer/Timer';
+import Flashcard from './Flashcard/Flashcard';
+import PlayButton from './PlayButton/PlayButton';
+import Timer from './Timer/Timer';
+import Points from './Points/Points'
 import classes from './Game.module.css';
 
 class Game extends Component {
@@ -14,7 +15,8 @@ class Game extends Component {
                     'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen'],
             currentWord: "",
             playing: false,
-            count: 10
+            count: 10,
+            points: 0
         }
     }
 
@@ -42,7 +44,7 @@ class Game extends Component {
         if (index < 15 && this.state.playing) {
             // Change current word and wait 10s for next word
             this.setState({ currentWord: this.state.words[index] })
-            setTimeout(() => this.wordTimer(index + 1), 10000);
+            setTimeout(() => this.wordTimer(index + 1), 11000);
             // Restart countdown for new word
             this.setState({ count: 10 });
             this.startTimer(this.state.count);
@@ -66,14 +68,19 @@ class Game extends Component {
         return(
             // Card Component for flashcard
             <div className={classes.Game}>
+                {/* Countdown for each word */}
+                <div className={classes.Tracking}>
+                    <Timer count={this.state.count}/>
+                    <Points points={this.state.points}/>
+                </div>
+                <br />
                 {/* <Flashcard word={this.state.words.length ? this.state.words[0].toUpperCase() : "CLICK START"}/> */}
                 <Flashcard word={this.state.currentWord ? this.state.currentWord.toUpperCase() : "CLICK START"}/>
                 <br />
-                {/* Countdown for each word */}
-                <Timer count={this.state.count}/>
-                <br />
                 {/* Start or Restart game with button */}
                 <PlayButton togglePlay={this.togglePlay} playing={this.state.playing} />
+                <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                {/* <div>Icons made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */}
             </div>
         );
     }
