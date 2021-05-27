@@ -13,7 +13,9 @@ class Game extends Component {
             words: ['one', 'two', 'three', 'four', 'five',
                     'six', 'seven', 'eight', 'nine', 'ten',
                     'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen'],
+            started: false,
             currentWord: "",
+            currentWordNum: 0,
             playing: false,
             count: 10,
             currentWordPoint: true,
@@ -24,19 +26,63 @@ class Game extends Component {
     // Toggle playing of game - start and restart
     togglePlay = () => {
         //  Change state of play
-        const newPlayState = !this.state.playing;
-        this.setState({ playing: newPlayState});
-
-        if (newPlayState) {
-            // Start game and call wordTimer to time 15 words
-            setTimeout(() => {
-                this.wordTimer(0);
-            }, 1000);
-
-        } else {
-            // Restart game by changing current word to empty string and reset countdown
-            this.setState({ currentWord: "", count: 10, currentWordPoint: true });
-        }
+        console.log("before", this.state.playing)
+        // const newPlayState = !this.state.playing;
+        this.setState({ playing: !this.state.playing}, () => {
+            console.log("pl", this.state.playing)
+            if (!this.state.started) {
+                // Start game and call wordTimer to time 15 words
+                this.setState({ started: true});
+                setTimeout(() => {
+                    this.wordTimer(0);
+                }, 1000);
+            } else {
+                if (this.state.playing) {
+                    
+                    let timeLeft = (this.state.count + 1) * 1000;
+                    // console.log("hi", timeLeft, this.state.playing)
+                    this.startTimer(this.state.count);
+                    setTimeout(() => {
+                        // this.wordTimer(this.state.currentWordNum);
+                        console.log("num", this.state.currentWordNum + 1)
+                        this.wordTimer(this.state.currentWordNum + 1);
+                    }, timeLeft);
+                    
+                }
+            }
+        });
+        // console.log("pl", this.state.playing)
+        // if (!this.state.started) {
+        //     // Start game and call wordTimer to time 15 words
+        //     this.setState({ started: true});
+        //     setTimeout(() => {
+        //         this.wordTimer(0);
+        //     }, 1000);
+        // } else {
+        //     if (this.state.playing) {
+                
+        //         // let timeLeft = (this.state.count + 1) * 1000;
+        //         // // console.log("hi", timeLeft, this.state.playing)
+        //         // this.startTimer(this.state.count);
+        //         // setTimeout(() => {
+        //         //     // this.wordTimer(this.state.currentWordNum);
+        //         //     console.log("num", this.state.currentWordNum + 1)
+        //         //     this.wordTimer(this.state.currentWordNum + 1);
+        //         // }, timeLeft);
+                
+        //     }
+        // }
+        // if (newPlayState) {
+        //     // Start game and call wordTimer to time 15 words
+        //     // setTimeout(() => {
+        //     //     this.wordTimer(0);
+        //     // }, 1000);
+        // }
+        // } else {
+        //     this.setState({ currentWord: "", count: 10, currentWordPoint: true, points: 0 });
+        //     // Restart game by changing current word to empty string and reset countdown
+        //     // this.setState({ currentWord: "", count: 10, currentWordPoint: true, points: 0 });
+        // }
     }
 
     // Wait 10 seconds before calling next word in Game
@@ -45,7 +91,10 @@ class Game extends Component {
         if (index < 15 && this.state.playing) {
             // Change current word and wait 10s for next word
             this.setState({ currentWord: this.state.words[index], currentWordPoint: false })
-            setTimeout(() => this.wordTimer(index + 1), 11000);
+            setTimeout(() => {
+                this.setState({ currentWordNum: index + 1 })
+                this.wordTimer(index + 1)
+            }, 11000);
 
             // Restart countdown for new word
             this.setState({ count: 10, currentWordPoint: false });
@@ -62,11 +111,13 @@ class Game extends Component {
     // Timer - Countdown 10 seconds
     startTimer = currCount => {
         // Count down till 0 only when game is in play mode
+        console.log(this.state.count, this.state.playing)
         if (currCount > 0 && this.state.playing) {
 
             setTimeout(() => {
                 // Count down by 1s each time
                 this.state.playing && this.setState({ count: currCount - 1 });
+                console.log("true")
                 this.startTimer(currCount - 1);
 
             }, 1000);
@@ -76,7 +127,7 @@ class Game extends Component {
     // Add a point to the total when the Points Button/ Check mark is clicked
     addPoint = () => {
         // Only one point per word, only when game is on
-        if (this.state.playing && !this.state.currentWordPoint) {
+        if (this.state.started && !this.state.currentWordPoint) {
             this.setState({ points: this.state.points + 1, currentWordPoint: true });
         }
     }

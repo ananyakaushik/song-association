@@ -7,7 +7,7 @@ class PlayButton extends Component {
         return(
             // Card Component for flashcard
             <button className={classes.Button} onClick={this.props.togglePlay} >
-                {this.props.playing? "RESTART" : "START"}
+                {this.props.playing? "PAUSE" : "START"}
             </button>
         );
     }
